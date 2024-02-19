@@ -24,8 +24,10 @@
 }
 
 .seat-num {
-    padding: 16px 16px;
+    padding: 17px 46px;
     border: 0;
+    font-size: 18px;
+    font-weight: 500;
     color: #03071280;
     border-radius: 12px;
     background: rgb(247, 248, 248);
