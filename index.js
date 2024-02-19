@@ -32,6 +32,10 @@ for (const seat of seats) {
             document.getElementById('element').innerHTML = "";
             const ticketType = document.getElementById("ticket-type");
             const eventTargetText = event.target.innerText;
+            //next button when no seat is selected
+            if (seatIncrease === 0) {
+                document.getElementById('next-button').setAttribute('disabled', true);
+            }
 
             //removing ticket type information
             for (const value of ticketType.querySelectorAll(".topdiv")) {
@@ -65,7 +69,12 @@ for (const seat of seats) {
             seatCounts.innerText = count;
             totalPrice = seatIncrease * 550;
             document.getElementById('total-price').innerText = totalPrice;
+            //next button when input has value and atleast one seat selected
 
+            if (seatIncrease > 0 && number.value !== '') {
+                document.getElementById('next-button').removeAttribute('disabled');
+
+            }
             if (seatIncrease <= 4) {
                 topdiv.classList.add("p-4", "flex", "justify-between", "topdiv");
                 const seatposition = document.createElement("h3");
