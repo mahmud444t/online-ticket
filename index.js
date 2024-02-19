@@ -150,7 +150,10 @@ document.getElementById('coupon-apply').addEventListener('click', function (even
 
     }
     else {
+
+        document.getElementById('coupon').value = '';
         document.getElementById('grand-price').innerText = totalPrice;
+        alert("enter a valid coupon");
     }
 })
 
