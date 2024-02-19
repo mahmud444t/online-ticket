@@ -9,7 +9,6 @@ const number = document.getElementById('number');
 
 for (const seat of seats) {
     seat.addEventListener("click", function (event) {
-        event.target.style.color = '#fff';
         const seatCounts = document.getElementById('seat-count');
         let count = parseInt(seatCounts.innerText);
 
@@ -18,6 +17,8 @@ for (const seat of seats) {
         const topdiv = document.createElement("div");
 
 
+
+        // if seat is selected
         if (event.target.style.backgroundColor === 'rgb(29, 209, 0)') {
             // Change background color back to original (or any other color you prefer)
             event.target.style.backgroundColor = '#f7f8f8';
@@ -29,6 +30,18 @@ for (const seat of seats) {
             totalPrice -= 550;
             document.getElementById('total-price').innerText = totalPrice;
             document.getElementById('element').innerHTML = "";
+            const ticketType = document.getElementById("ticket-type");
+            const eventTargetText = event.target.innerText;
+
+            //removing ticket type information
+            for (const value of ticketType.querySelectorAll(".topdiv")) {
+                const seatposition = value.querySelector("h3");
+                if (seatposition.textContent === eventTargetText) {
+                    value.remove();
+                    break; // Break the loop after removing the first matching topdiv
+                }
+            }
+
             if (seatIncrease <= 4) {
                 document.getElementById('coupon-div').classList.remove('hidden');
 
@@ -40,19 +53,21 @@ for (const seat of seats) {
             }
             document.getElementById('grand-price').innerText = totalPrice;
 
-        } else {
-            // Change background color to red
+        }
+        // if seat is not selected
+        else {
+
             event.target.style.backgroundColor = '#1dd100';
             event.target.style.color = '#fff';
             count--;
             seatIncrease++;
             document.getElementById('seat-increase').innerText = seatIncrease;
             seatCounts.innerText = count;
-            totalPrice += 550;
+            totalPrice = seatIncrease * 550;
             document.getElementById('total-price').innerText = totalPrice;
 
             if (seatIncrease <= 4) {
-                topdiv.classList.add("p-4", "flex", "justify-between");
+                topdiv.classList.add("p-4", "flex", "justify-between", "topdiv");
                 const seatposition = document.createElement("h3");
                 const type = document.createElement("h3");
                 const seatPrice = document.createElement("h3");
