@@ -2,7 +2,8 @@ const seats = document.querySelectorAll('.seat');
 let totalPrice = 0;
 let seatIncrease = 0;
 let discount = 0;
-
+let arr = [];
+arrIndex = 0;
 const number = document.getElementById('number');
 
 
@@ -45,7 +46,6 @@ for (const seat of seats) {
             totalPrice += 550;
             document.getElementById('total-price').innerText = totalPrice;
 
-
             if (seatIncrease <= 4) {
                 topdiv.classList.add("p-4", "flex", "justify-between");
                 const seatposition = document.createElement("h3");
@@ -56,6 +56,8 @@ for (const seat of seats) {
                 seatPrice.textContent = "550";
                 ticketType.append(topdiv);
                 topdiv.append(seatposition, type, seatPrice);
+                let el = event.target.id;
+                arr.push(el);
             }
 
             if (seatIncrease == 4) {
@@ -73,6 +75,7 @@ for (const seat of seats) {
                 document.getElementById('total-price').innerText = totalPrice;
                 count++;
                 seatCounts.innerText = count;
+
             }
             document.getElementById('grand-price').innerText = totalPrice;
 
@@ -91,12 +94,18 @@ number.addEventListener('keyup', function () {
         document.getElementById('next-button').setAttribute('disabled', true);
     }
 });
+
+// next button
 document.getElementById('next-button').addEventListener('click', function () {
     document.getElementById('head').classList.add('hidden');
     document.getElementById('main').classList.add('hidden');
     document.getElementById('foot').classList.add('hidden');
     my_modal_4.showModal();
 })
+
+
+
+
 // COUPON SECTION
 document.getElementById('coupon-apply').addEventListener('click', function (event) {
     if (document.getElementById('coupon').value === 'NEW15') {
@@ -121,5 +130,30 @@ document.getElementById('coupon-apply').addEventListener('click', function (even
     }
     else {
         document.getElementById('grand-price').innerText = totalPrice;
+    }
+})
+
+//Continue button
+
+document.getElementById('Continue').addEventListener('click', function () {
+    document.getElementById('head').classList.remove('hidden');
+    document.getElementById('main').classList.remove('hidden');
+    document.getElementById('foot').classList.remove('hidden');
+    document.getElementById('coupon-div').classList.remove('hidden');
+    document.getElementById('ticket-type').innerHTML = '';
+    document.getElementById('grand-price').innerText = 0;
+    document.getElementById('total-price').innerText = 0;
+    document.getElementById('element').innerHTML = '';
+    document.getElementById('coupon').value = '';
+    document.getElementById('number').value = '';
+    document.getElementById('coupon').setAttribute('disabled', false);
+
+    document.getElementById('seat-increase').innerText = 0;
+    document.getElementById('seat-count').innerText = 40;
+    seatIncrease = 0;
+    for (const element of arr) {
+        const normal = document.getElementById(element);
+        normal.style.backgroundColor = '#f7f8f8';
+        normal.style.color = '#03071280';
     }
 })
