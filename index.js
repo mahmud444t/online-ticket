@@ -29,9 +29,14 @@ for (const seat of seats) {
             totalPrice -= 550;
             document.getElementById('total-price').innerText = totalPrice;
             document.getElementById('element').innerHTML = "";
+            if (seatIncrease <= 4) {
+                document.getElementById('coupon-div').classList.remove('hidden');
 
+            }
             if (seatIncrease < 4) {
                 document.getElementById('coupon-apply').setAttribute('disabled', true);
+                document.getElementById('coupon').value = '';
+
             }
             document.getElementById('grand-price').innerText = totalPrice;
 
@@ -58,6 +63,7 @@ for (const seat of seats) {
                 topdiv.append(seatposition, type, seatPrice);
                 let el = event.target.id;
                 arr.push(el);
+
             }
 
             if (seatIncrease == 4) {
@@ -75,7 +81,7 @@ for (const seat of seats) {
                 document.getElementById('total-price').innerText = totalPrice;
                 count++;
                 seatCounts.innerText = count;
-
+                document.getElementById('coupon').value = '';
             }
             document.getElementById('grand-price').innerText = totalPrice;
 
@@ -146,8 +152,8 @@ document.getElementById('Continue').addEventListener('click', function () {
     document.getElementById('element').innerHTML = '';
     document.getElementById('coupon').value = '';
     document.getElementById('number').value = '';
-    document.getElementById('coupon').setAttribute('disabled', false);
-
+    document.getElementById('coupon-apply').setAttribute('disabled', false);
+    document.getElementById('next-button').setAttribute('disabled', true);
     document.getElementById('seat-increase').innerText = 0;
     document.getElementById('seat-count').innerText = 40;
     seatIncrease = 0;
